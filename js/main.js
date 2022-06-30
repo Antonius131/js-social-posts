@@ -98,12 +98,14 @@ const posts = [
 ];
 
 
+
 // taking out the objects from the array and put them in the DOM
 
 const postsList = document.querySelector('.posts-list');
 
+
 posts.forEach((post) => {
-    const {content, media, author, likes, created} = post;
+    const {content, media, author, likes, created, is_liked} = post;
 
     postsList.innerHTML += `<div class="post">
                                 <div class="post__header">
@@ -124,7 +126,7 @@ posts.forEach((post) => {
                                 <div class="post__footer">
                                     <div class="likes js-likes">
                                         <div class="likes__cta">
-                                            <a class="like-button  js-like-button" href="#" data-postid="1">
+                                            <a class="like-button  js-like-button ${is_liked}" href="#" data-postid="1">
                                                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                                 <span class="like-button__label">Mi Piace</span>
                                             </a>
@@ -134,19 +136,27 @@ posts.forEach((post) => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>`
+                            </div>`;
+
+
+
+    // get all the like buttons and aad class ".active" when clicked
+    const likeButtons = document.querySelectorAll('.like-button');
+    likeButtons.forEach((button) => { 
+        button.addEventListener('click', function() {
+            let likedButton = post.is_liked;
+
+            if (likedButton === true) {
+                button.classList.remove('true');
+            }
+            button.classList.add('true');
+            
+        });
+    }); 
 });
 
 
 
 
-// get all the like buttons and aad class ".active" when clicked
-const likeButtons = document.querySelectorAll('.like-button');
 
-console.log(likeButtons);
 
-likeButtons.forEach((button) => {
-    button.addEventListener('click', function() {
-        button.classList.add('like-button--liked');
-    });
-});

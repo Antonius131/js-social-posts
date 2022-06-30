@@ -136,3 +136,17 @@ posts.forEach((post) => {
                                 </div>
                             </div>`
 });
+
+
+
+
+// get all the like buttons and aad class ".active" when clicked
+const likeButtons = document.querySelectorAll('.like-button');
+
+console.log(likeButtons);
+
+likeButtons.forEach((button) => {
+    button.addEventListener('click', function() {
+        button.classList.add('like-button--liked');
+    });
+});
